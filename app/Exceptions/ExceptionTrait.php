@@ -20,7 +20,7 @@ trait ExceptionTrait
 	            }
 
 		            //if not model & http issue then return
-		            return parent::render($request, $exception);
+		            return parent::render($request, $e);
         
 	}
 
