@@ -6,6 +6,7 @@ use App\Model\Review;
 use App\Model\Product;
 use Illuminate\Http\Request;
 use App\Http\Resources\ReviewResource;
+use App\Http\Requests\ReviewRequest;
 
 class ReviewController extends Controller
 {
@@ -37,9 +38,15 @@ class ReviewController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ReviewRequest $request, Product $product)
     {
-        //
+        $review = new Review($request->all());
+
+        $product->review()->save($review);
+
+        return response()->json([
+                'message' => 'Review Data saved successfully!'
+            ], 200);
     }
 
     /**

@@ -61,9 +61,14 @@ class ProductController extends Controller
         $product->user_id = Auth::id();
         $product->save();
 
-        return response([
-            'data' => new ProductResource($product)
-        ], 201);
+        // return response([
+        //     'data' => new ProductResource($product)
+        // ], 201);
+
+        return response()->json([
+                //'data' => new ProductResource($product),
+                'message' => 'Data saved successfully!'
+            ], 200);
     }
 
     /**
@@ -103,7 +108,8 @@ class ProductController extends Controller
         $product->update($request->all());
 
         return response([
-            'data' => new ProductResource($product)
+            //'data' => new ProductResource($product),
+            'message' => 'product successfully updated!'
         ], 201);
 
     }
@@ -120,7 +126,10 @@ class ProductController extends Controller
 
         $product->delete();
 
-        return response(null, 204);
+        //return response(null, 204);
+        return response()->json([
+                'message' => 'Product successfully Delete!'
+            ], 200);
     }
 
     public function productUserCheck($product)
